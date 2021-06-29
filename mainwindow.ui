@@ -75,19 +75,6 @@
       </rect>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_Close">
-     <property name="geometry">
-      <rect>
-       <x>410</x>
-       <y>130</y>
-       <width>88</width>
-       <height>27</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Close</string>
-     </property>
-    </widget>
    </widget>
    <widget class="QGroupBox" name="groupBox_2">
     <property name="geometry">
@@ -150,6 +137,19 @@
       <string>SetDown</string>
      </property>
     </widget>
+   </widget>
+   <widget class="QPushButton" name="pushButton_Close">
+    <property name="geometry">
+     <rect>
+      <x>690</x>
+      <y>580</y>
+      <width>88</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Close</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

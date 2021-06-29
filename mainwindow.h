@@ -25,6 +25,8 @@ private slots:
 
     void on_pushButton_Disconnect_clicked();
 
+    void readFromPort();
+
 private:
     Ui::MainWindow *ui;
     void addToLogs(QString message);

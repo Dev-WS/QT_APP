@@ -66,16 +66,19 @@ void MainWindow::on_pushButton_Connect_clicked()
 
 
     // OTWÓRZ I SKONFIGURUJ PORT:
-    if(device->open(QSerialPort::ReadWrite)) {
-      this->device->setBaudRate(QSerialPort::Baud9600);
-      this->device->setDataBits(QSerialPort::Data8);
-      this->device->setParity(QSerialPort::NoParity);
-      this->device->setStopBits(QSerialPort::OneStop);
-      this->device->setFlowControl(QSerialPort::NoFlowControl);
+        if(device->open(QSerialPort::ReadWrite)) {
+            this->device->setBaudRate(QSerialPort::Baud115200);
+            this->device->setDataBits(QSerialPort::Data8);
+            this->device->setParity(QSerialPort::NoParity);
+            this->device->setStopBits(QSerialPort::OneStop);
+            this->device->setFlowControl(QSerialPort::NoFlowControl);
 
-      this->addToLogs("Otwarto port szeregowy.");
-      } else {
-      this->addToLogs("Otwarcie portu szeregowego się nie powiodło!");
+            this->addToLogs("Otwarto port szeregowy.");
+
+            connect(this->device, SIGNAL(readyRead()), this, SLOT(readFromPort()));
+
+        } else {
+            this->addToLogs("Otwarcie portu szeregowego się nie powiodło!");
         }
     } else {
         this->addToLogs("Port juz jest otwarty");
@@ -93,4 +96,20 @@ void MainWindow::on_pushButton_Disconnect_clicked()
           this->addToLogs("Port nie jest otwarty!");
           return;
         }
+}
+
+
+
+void MainWindow::readFromPort()
+{
+    while(this->device->canReadLine()) {
+        QString line = this->device->readLine();
+        //qDebug() << line;
+
+        QString terminator = "\r";
+        int pos = line.lastIndexOf(terminator);
+        //qDebug() << line.left(pos);
+
+        this->addToLogs(line.left(pos));
+      }
 }
