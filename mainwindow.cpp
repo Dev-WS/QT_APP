@@ -38,7 +38,7 @@ void MainWindow::on_pushButton_Serach_clicked()
     }
 
 
-    qDebug() << QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss");
+    //qDebug() << QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss");
 
 }
 
@@ -56,8 +56,12 @@ void MainWindow::on_pushButton_Connect_clicked()
         return;
     }
 
-    QString portName = ui->comboBox->currentText().split("\t").first();
+    QString portName = ui->comboBox->currentText().split(" ").first();
+    qDebug() << portName;
+
     this->device->setPortName(portName);
+    //this->device->setPort('COM10');
+
     if(!device->isOpen()){
 
 
@@ -77,4 +81,16 @@ void MainWindow::on_pushButton_Connect_clicked()
         this->addToLogs("Port juz jest otwarty");
         return;
     }
+}
+
+
+void MainWindow::on_pushButton_Disconnect_clicked()
+{
+        if(this->device->isOpen()) {
+          this->device->close();
+          this->addToLogs("Zamknięto połączenie.");
+        } else {
+          this->addToLogs("Port nie jest otwarty!");
+          return;
+        }
 }

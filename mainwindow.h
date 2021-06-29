@@ -22,6 +22,9 @@ private slots:
 
     void on_pushButton_Connect_clicked();
 
+
+    void on_pushButton_Disconnect_clicked();
+
 private:
     Ui::MainWindow *ui;
     void addToLogs(QString message);
