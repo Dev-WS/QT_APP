@@ -44,7 +44,9 @@ else()
     endif()
 endif()
 
-target_link_libraries(BT_App PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+find_package(Qt5 CONFIG REQUIRED Core Widgets Gui PrintSupport SerialPort)
+
+target_link_libraries(BT_App PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt5::SerialPort)
 
 set_target_properties(BT_App PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
